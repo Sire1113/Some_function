@@ -57,8 +57,7 @@ def predict(net,test_features,test_data):
     test_data = test_data.reset_index()
     y_pred = net(test_features).detach().cpu()
     predictions = torch.round(y_pred).numpy()
-    test_data['SalePrice'] = pd.Series(predictions.reshape(1,-1)[0])
-    submission = test_data[['Id','SalePrice']]
+
     submission.to_csv('submission.csv')
 
 if __name__ == '__main__':
